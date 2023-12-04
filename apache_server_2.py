@@ -1,9 +1,5 @@
 import pathlib
-import pyarrow as pa
 import pyarrow.flight as fl
-import pandas as pd
-import pickle
-from company import Company
 
 # Define a Flight endpoint to serve the FlightInfo and RecordBatch
 class FlightServer(fl.FlightServerBase):
@@ -23,6 +19,7 @@ class FlightServer(fl.FlightServerBase):
             raise fl.FlightUnimplementedError(f'Unknown action: {action.type}')
         
           
+    #store data in local dicationary
     def do_put(self, context, descriptor, reader, 
                writer):
         table_name = descriptor.command
@@ -38,8 +35,10 @@ class FlightServer(fl.FlightServerBase):
         print("Keys:")
         print(self.tables.keys())
     
+    #retrive data from dictionary and send the batch stream to gateway
     def do_get(self, context, ticket):
         table_name = ticket.ticket
+        print("Request recieved for " + str(table_name))
         table = self.tables[table_name]
         return fl.RecordBatchStream(table)
 
