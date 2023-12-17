@@ -43,8 +43,8 @@ Group project to implement a consistent hashing system using Apache Arrow Flight
 </details>
 
 <details>
-  <summary></summary>
-  Group repository: subramanyaJagadeesh/consistent_hashing_cmpe_273
+  <summary>Group repository: </summary>
+  subramanyaJagadeesh/consistent_hashing_cmpe_273
 </details>
 
 
