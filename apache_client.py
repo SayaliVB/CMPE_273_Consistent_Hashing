@@ -25,18 +25,14 @@ class ApacheClient:
 
 client = ApacheClient()
 
-with open('./companies_sorted.csv', mode ='r') as file:   
+with open('./companies_sorted1.csv', mode ='r') as file:   
         dict_reader = DictReader(file)
      
         list_of_dict = list(dict_reader)
-    
-        #print(list_of_dict)
-count =0
+
 for rec in list_of_dict:
-    #count= count+1
     table =  pa.Table.from_pylist([rec])
-    #if count ==3:
     client.put_table(rec["id"],table)
-    time.sleep(5)
+    #time.sleep(15)
 
 print(client.get_table("5944912"))

@@ -1,5 +1,6 @@
 import pathlib
 import pyarrow.flight as fl
+from csv import DictReader
 
 # Define a Flight endpoint to serve the FlightInfo and RecordBatch
 class FlightServer(fl.FlightServerBase):
@@ -9,6 +10,7 @@ class FlightServer(fl.FlightServerBase):
         self._repo = repo
         self.tables = {}
         self._data_store = {}
+        self.load()
     
     #Mainly used for checking server health
     def do_action(self, context, action):
@@ -23,19 +25,11 @@ class FlightServer(fl.FlightServerBase):
     def do_put(self, context, descriptor, reader, 
                writer):
         table_name = descriptor.command
-        # print("Table_name: ")
-        # print(table_name)
         self.tables[table_name] = reader.read_all()
-        # print(1)
-        # print(len(self.tables[table_name]))
-        # print(2)
-        # print(self.tables)
-        # print(3)
-        # print(self.tables[table_name])
         print("Keys:")
         print(self.tables.keys())
-
-    #retrive data from dictionary and send the batch stream to gateway    
+    
+    #retrive data from dictionary and send the batch stream to gateway
     def do_get(self, context, ticket):
         table_name = ticket.ticket
         print("Request recieved for " + str(table_name))
@@ -44,6 +38,14 @@ class FlightServer(fl.FlightServerBase):
         print(type(data))
         return data
 
+    def load(self):
+        with open('./companies_sorted.csv', mode ='r') as file:   
+            dict_reader = DictReader(file)
+        
+            list_of_dict = list(dict_reader)
+
+            for rec in list_of_dict:
+                self._data_store[rec["id"]] = rec
 
 server = FlightServer("grpc://localhost:8816")
 print("Starting server 1 at 8816...")
