@@ -34,7 +34,7 @@ Group project to implement a consistent hashing system using Apache Arrow Flight
 </details>
 
 <details>
-  <summary>Important Links: </summary>
+  <summary>Important Links </summary>
   
   https://blog.djnavarro.net/posts/2022-10-18_arrow-flight/
   https://arrow.apache.org/docs/python/generated/pyarrow.flight.FlightStreamReader.html#pyarrow-flight-flightstreamreader
@@ -43,7 +43,7 @@ Group project to implement a consistent hashing system using Apache Arrow Flight
 </details>
 
 <details>
-  <summary>Group repository: </summary>
+  <summary>Group repository </summary>
   subramanyaJagadeesh/consistent_hashing_cmpe_273
 </details>
 
